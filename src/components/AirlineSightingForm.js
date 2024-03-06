@@ -3,7 +3,7 @@ import { Typography, Button, TextField, Grid, Card, CardContent, Input, InputLab
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const AddAirlineSightingForm = ({ onAdd }) => {
+const AddAirlineSightingForm = ({}) => {
     const [formData, setFormData] = useState({
         name: '',
         shortName: '',
@@ -43,7 +43,7 @@ const AddAirlineSightingForm = ({ onAdd }) => {
                 imgData
             );
 
-            const response = await axios.post('https://localhost:44389/api/AirlineSighting/Add', formData);
+            const response = await axios.post('https://airsighting.azurewebsites.net/api/AirlineSighting/Add', formData);
             await Swal.fire({
                 title: "Success!",
                 text: response.data.message,
@@ -51,7 +51,6 @@ const AddAirlineSightingForm = ({ onAdd }) => {
                 confirmButtonText: "OK",
                 type: "success"
             });
-            onAdd();
         } catch (error) {
             console.error('Error adding sighting: ', error);
             await Swal.fire({

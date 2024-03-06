@@ -28,7 +28,7 @@ const AirlineSightingApp = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://localhost:44389/api/AirlineSighting/GetAll');
+                const response = await axios.get('https://airsighting.azurewebsites.net/api/AirlineSighting/GetAll');
                 setSightings(response.data.data);
             } catch (error) {
                 console.error('Error fetching data: ', error);
@@ -44,7 +44,7 @@ const AirlineSightingApp = () => {
         }
         else {
             try {
-                const response = await axios.get(`https://localhost:44389/api/AirlineSighting/Get/${search}`);
+                const response = await axios.get(`https://airsighting.azurewebsites.net/api/AirlineSighting/Get/${search}`);
                 setSightings(response.data.data);
             } catch (error) {
                 console.error('Error fetching data: ', error);
@@ -63,7 +63,7 @@ const AirlineSightingApp = () => {
 
     const handleEditSubmit = async () => {
         try {
-            await axios.put(`https://localhost:44389/api/AirlineSighting/Update`, editformData);
+            await axios.put(`https://airsighting.azurewebsites.net/api/AirlineSighting/Update`, editformData);
             setIsEditModalOpen(false);
             window.location.href = "/";
         } catch (error) {
@@ -95,22 +95,9 @@ const AirlineSightingApp = () => {
         }));
     };
 
-    const handleAdd = async () => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('https://localhost:44389/api/AirlineSighting/GetAll');
-                setSightings(response.data.data);
-            } catch (error) {
-                console.error('Error fetching data: ', error);
-            }
-        };
-
-        fetchData();
-    };
-
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete(`https://localhost:44389/api/AirlineSighting/Delete/${id}`);
+            const response = await axios.delete(`https://airsighting.azurewebsites.net/api/AirlineSighting/Delete/${id}`);
             await Swal.fire({
                 title: "Success!",
                 text: response.data.message,
@@ -143,7 +130,7 @@ const AirlineSightingApp = () => {
             </Typography>
 
             <Container maxWidth="md">
-                <AddAirlineSightingForm onAdd={handleAdd} />
+                <AddAirlineSightingForm/>
             </Container>
 
             <Container maxWidth="lg" sx={{ marginTop: 4 }}>
